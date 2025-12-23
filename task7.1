@@ -1,0 +1,39 @@
+import random
+
+def check_input(arr):
+    if not isinstance(arr, list) or len(arr) != 2:
+        return False
+    a, b = arr
+    if not isinstance(a, int) or not isinstance(b, int):
+        return False
+    if a <= 0 or b <= 0:
+        return False
+    if a >= b:
+        return False
+    return True
+
+
+def get_ladder(valid_arr):
+    a, b = valid_arr
+    n = random.randint(a, b)
+
+    result = []
+
+    step = -1 if b >= n else 1
+    for i in range(b, n + step, step):
+        result.append('*' * i)
+
+    step = 1 if a <= n else -1
+    for i in range(a, n + step, step):
+        result.append('*' * i)
+
+    return result
+
+
+def main(arrays):
+    for sub in arrays:
+        if check_input(sub):
+            ladder = get_ladder(sub)
+            for line in ladder:
+                print(line)
+            break
